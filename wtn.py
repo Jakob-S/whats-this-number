@@ -31,7 +31,7 @@ def abundant(n):
 		print(str(n), "is not an abundant number.")
 		print("Total sum is", str(total))
 
-def listabundant(n):
+def listabundant(n, mode):
 	listabundant = []
 	for i in range(6, n):
 		abundant = list(divisorGenerator(i))
@@ -40,8 +40,15 @@ def listabundant(n):
 		for p in abundant:
 			total += p
 		if total > i:
-			listabundant.append(i)
-	print("The following numbers are abundant:")
+			if mode == "normal":
+				listabundant.append(i)
+			elif mode == "odd":
+				if i % 2 != 0:
+					listabundant.append(i)
+			elif mode == "even":
+				if i % 2 == 0:
+					listabundant.append(i)
+	print("The following", mode,  "numbers are abundant:")
 	print(listabundant)
 
 # Programming logic starts over here
@@ -50,10 +57,21 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("--abundant", help="Finds out whether given nr. is abundant or not")
 parser.add_argument("--listabundant", help="Generates list with abundant numbers from 6 to n")
+parser.add_argument("--oddabundant", help="Generate list with only odd abundant numbers from 6 to n")
+parser.add_argument("--evenabundant", help="Generate list with only even abundant numbers from 6 to n")
 args = parser.parse_args()
 if args.abundant:
 	n = int(args.abundant)
 	abundant(n)
 elif args.listabundant:
 	limes = int(args.listabundant)
-	listabundant(limes)
+	mode = "normal"
+	listabundant(limes, mode)
+elif args.oddabundant:
+	limes = int(args.oddabundant)
+	mode = "odd"
+	listabundant(limes, mode)
+elif args.evenabundant:
+	limes = int(args.evenabundant)
+	mode = "even"
+	listabundant(limes, mode)
