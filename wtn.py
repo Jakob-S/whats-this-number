@@ -31,12 +31,29 @@ def abundant(n):
 		print(str(n), "is not an abundant number.")
 		print("Total sum is", str(total))
 
+def listabundant(n):
+	listabundant = []
+	for i in range(6, n):
+		abundant = list(divisorGenerator(i))
+		abundant.remove(i)
+		total = 0
+		for p in abundant:
+			total += p
+		if total > i:
+			listabundant.append(i)
+	print("The following numbers are abundant:")
+	print(listabundant)
+
 # Programming logic starts over here
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--abundant", help="Finds out whether given nr. is abundant or not")
+parser.add_argument("--listabundant", help="Generates list with abundant numbers from 6 to n")
 args = parser.parse_args()
 if args.abundant:
 	n = int(args.abundant)
 	abundant(n)
+elif args.listabundant:
+	limes = int(args.listabundant)
+	listabundant(limes)
