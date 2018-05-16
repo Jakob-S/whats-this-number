@@ -21,30 +21,36 @@ def abundant(n):
 	for i in abundant:
 		total += i
 
-	if total > n:
+	if total % n == 0 and total > n:
+		print(abundant)
+		print(str(n), "is a hyperperfect number.")
+		print("Total sum is:", str(total))
+		print("Look at the binary:", bin(n)[2:])
+	elif total > n:
 		print(abundant)
 		print(str(n), "is an abundant number.")
 		print("Total sum is:", str(total))
 	elif total < n:
 		print(abundant)
 		print(str(n), "is not an abundant number.")
-		print("Total sum is", str(total))
+		print("Total sum is:", str(total))
 	elif total == n:
 		print(abundant)
 		print(str(n), "is a perfect number.")
-		print("Total sum is", str(total))
-		print("Look at the binary: ", bin(n)[2:])
+		print("Total sum is:", str(total))
+		print("Look at the binary:", bin(n)[2:]) 
 
 def listabundant(n, mode):
 	listabundant = []
 	listperfect = []
+	listhyperperfect = []
 	for i in range(6, n):
 		abundant = list(divisorGenerator(i))
 		abundant.remove(i)
 		total = 0
 		for p in abundant:
 			total += p
-		if total > i:
+		if total > i and total % i != 0:
 			if mode == "normal":
 				listabundant.append(i)
 			elif mode == "odd":
@@ -53,7 +59,16 @@ def listabundant(n, mode):
 			elif mode == "even":
 				if i % 2 == 0:
 					listabundant.append(i)
-		if total == i:
+		elif total > i and total % i == 0:
+			if mode == "listhyperperfect":
+				listhyperperfect.append(i)
+			elif mode == "oddhyperperfect":
+				if i % 2 != 0:
+					listhyperperfect.append(i)
+			elif mode == "evenhyperperfect":
+				if i % 2 == 0:
+					listhyperperfect.append(i)
+		elif total == i:
 			if mode == "normalperfect":
 				listperfect.append(i)
 			elif mode == "oddperfect":
@@ -75,6 +90,16 @@ def listabundant(n, mode):
 	elif mode == "normal" or mode == "odd" or mode == "even":
 		print("The following", mode,  "numbers are abundant:")
 		print(listabundant)
+	elif mode == "listhyperperfect":
+		print("The following normal numbers are hyperperfect: ")
+		print(listhyperperfect)
+	elif mode == "oddhyperperfect":
+		print("The following", mode[:3], "numbers are perfect:")
+		print(listhyperperfect)
+		print("!!! It's not sure whether some odd perfect numbers exist or not !!!")
+	elif mode == "evenhyperperfect":
+		print("The following", mode[:4], "numbers are perfect:")
+		print(listhyperperfect)
 
 def binary(n):
 	print("Decimal: " + str(n))
@@ -83,8 +108,7 @@ def binary(n):
 # Programming logic starts over here
 
 parser = argparse.ArgumentParser()
-
-parser.add_argument("--abundant", help="Finds out whether given number is abundant or not")
+parser.add_argument("--abundant", help="Finds out whether given number is abundant, perfect, hyperperfect or nothing")
 parser.add_argument("--listabundant", help="Generates list with abundant numbers from 6 to n")
 parser.add_argument("--oddabundant", help="Generate list with only odd abundant numbers from 6 to n")
 parser.add_argument("--evenabundant", help="Generate list with only even abundant numbers from 6 to n")
@@ -93,7 +117,10 @@ parser.add_argument("--perfect", help="Finds out whether the given number is per
 parser.add_argument("--listperfect", help="Generates list with perfect numbers from 6 to n")
 parser.add_argument("--oddperfect", help="Generates list with only odd perfect numbers from 6 to n")
 parser.add_argument("--evenperfect", help="Generates list with only even perfect numbers from 6 to n")
-
+parser.add_argument("--hyperperfect", help="Find out whether given number is hyperperfect or not")
+parser.add_argument("--listhyperperfect", help="Generates list with hyperperfect numbers")
+parser.add_argument("--oddhyperperfect", help="Generates list with only odd hyperperfect numbers")
+parser.add_argument("--evenhyperperfect", help="Generates list with only even hyperperfect numbers")
 parser.add_argument("--any", help="Goes through any inline function and prints results for given number")
 
 args = parser.parse_args()
@@ -130,6 +157,21 @@ elif args.oddperfect:
 elif args.evenperfect:
 	limes = int(args.evenperfect)
 	mode = "evenperfect"
+	listabundant(limes, mode)
+elif args.hyperperfect:
+	n = int(args.hyperperfect)
+	abundant(n)
+elif args.listhyperperfect:
+	limes = int(args.listhyperperfect)
+	mode = "listhyperperfect"
+	listabundant(limes, mode)
+elif args.oddhyperperfect:
+	limes = int(args.oddhyperperfect)
+	mode = "oddhyperperfect"
+	listabundant(limes, mode)
+elif args.evenhyperperfect:
+	limes = int(args.evenhyperperfect)
+	mode = "evenhyperperfect"
 	listabundant(limes, mode)
 elif args.any:
 	print("")
