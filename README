@@ -1,1 +1,81 @@
-# whats-this-number
+<h1>What's this number</h1>
+<h3>wtn.py</h3>
+<hr>
+
+usage: wtn.py [-h] [--abundant ABUNDANT] [--listabundant LISTABUNDANT]
+              [--oddabundant ODDABUNDANT] [--evenabundant EVENABUNDANT]
+              [--binary BINARY] [--perfect PERFECT]
+              [--listperfect LISTPERFECT] [--oddperfect ODDPERFECT]
+              [--evenperfect EVENPERFECT] [--hyperperfect HYPERPERFECT]
+              [--listhyperperfect LISTHYPERPERFECT]
+              [--oddhyperperfect ODDHYPERPERFECT]
+              [--evenhyperperfect EVENHYPERPERFECT] [--insistent INSISTENT]
+              [--listinsistent LISTINSISTENT] [--oddinsistent ODDINSISTENT]
+              [--eveninsistent EVENINSISTENT] [--tetraedric TETRAEDRIC]
+              [--listtetraedric LISTTETRAEDRIC]
+              [--oddtetraedric ODDTETRAEDRIC]
+              [--eventetraedric EVENTETRAEDRIC] [--heavy HEAVY]
+              [--listheavy LISTHEAVY] [--oddheavy ODDHEAVY]
+              [--evenheavy EVENHEAVY] [--wondrous WONDROUS] [--any ANY]
+              [--random RANDOM]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --abundant ABUNDANT   Finds out whether given number is abundant, perfect,
+                        hyperperfect or nothing
+  --listabundant LISTABUNDANT
+                        Generates list with abundant numbers from 6 to n
+  --oddabundant ODDABUNDANT
+                        Generate list with only odd abundant numbers from 6 to
+                        n
+  --evenabundant EVENABUNDANT
+                        Generate list with only even abundant numbers from 6
+                        to n
+  --binary BINARY       Print the binary equivalent to the given number
+  --perfect PERFECT     Finds out whether the given number is perfect or not
+  --listperfect LISTPERFECT
+                        Generates list with perfect numbers from 6 to n
+  --oddperfect ODDPERFECT
+                        Generates list with only odd perfect numbers from 6 to
+                        n
+  --evenperfect EVENPERFECT
+                        Generates list with only even perfect numbers from 6
+                        to n
+  --hyperperfect HYPERPERFECT
+                        Find out whether given number is hyperperfect or not
+  --listhyperperfect LISTHYPERPERFECT
+                        Generates list with hyperperfect numbers
+  --oddhyperperfect ODDHYPERPERFECT
+                        Generates list with only odd hyperperfect numbers
+  --evenhyperperfect EVENHYPERPERFECT
+                        Generates list with only even hyperperfect numbers
+  --insistent INSISTENT
+                        Finds out how n-insistent the given number is
+  --listinsistent LISTINSISTENT
+                        Generates list with n numbers showing how insistent
+                        they are
+  --oddinsistent ODDINSISTENT
+                        Generates list with n odd numbers showing how
+                        insistent they are
+  --eveninsistent EVENINSISTENT
+                        Generates list with n even numbers showing how
+                        insistent they are
+  --tetraedric TETRAEDRIC
+                        Finds out whether given number is tetraedric or not
+  --listtetraedric LISTTETRAEDRIC
+                        Generates list with n tetraedric numbers
+  --oddtetraedric ODDTETRAEDRIC
+                        Generates list with n only odd numbers
+  --eventetraedric EVENTETRAEDRIC
+                        Generates list with n only even numbers
+  --heavy HEAVY         Find out whether given number is heavy or not
+  --listheavy LISTHEAVY
+                        Generates list with n heavy numbers
+  --oddheavy ODDHEAVY   Generates list with n odd heavy numbers
+  --evenheavy EVENHEAVY
+                        Generates list with n even heavy numbers
+  --wondrous WONDROUS   Find out whether given number is wondrous or not
+  --any ANY             Goes through any inline function and prints results
+                        for given number
+  --random RANDOM       Generates random number with n digits and doing same
+                        like --any

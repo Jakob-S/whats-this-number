@@ -2,8 +2,21 @@
 
 import argparse
 import math
+from random import uniform
 
 # Declaration of functions starts over here
+
+def any(n):
+	print("")
+	abundant(n)
+	print("")
+	binary(n)
+	print("")
+	heavy(n)
+	print("")
+	insistent(n)
+	print("")
+	tetraedric(n)
 
 def substitution(vz):
 	u = (1 + math.sqrt( 1 + 8* vz ) ) / 2
@@ -125,6 +138,26 @@ def heavy(n):
 	else:
 		print("Number", heavy, "is not a heavy number")
 
+def listheavy(n, mode):
+	listheavy = []
+	for i in range(1, n+1):
+		heavy = str(i)
+		value = 0
+		for j in heavy:
+			value += int(j)
+		if value/len(heavy) > 7:
+			if mode == "normal":
+				listheavy.append(i)
+			elif mode == "odd":
+				if i % 2 != 0:
+					listheavy.append(i)
+			elif mode == "even":
+				if i % 2 == 0:
+					listheavy.append(i)
+	print("The following", mode, "numbers are heavy")
+	print(listheavy)
+
+
 def insistent(n):
 	value = 1
 	counter = 1
@@ -137,9 +170,34 @@ def insistent(n):
 			print("Step", str(counter) + ".", number)
 			counter += 1
 			value = 1
-		print("Step", str(counter) + ".", number)
-
+	print("Step", str(counter) + ".", number)
 	print("Number", str(n), "is", str(counter) + "-insistent")
+
+def listinsistent(n, mode):
+	listinsistent = {}
+	for i in range(1, n+1):
+		value = 1
+		counter = 1
+		number = i
+		while number > 10:
+			for j in str(number):
+				value *= int(j)
+			number = value
+			if number > 10:
+				counter += 1
+				value = 1
+		if mode == "normal":
+			listinsistent[i] = counter
+		elif mode == "odd":
+			if  i % 2 != 0:
+				listinsistent[i] = counter
+		elif mode == "even":
+			if i % 2 == 0:
+				listinsistent[i] = counter
+	print("The following dictionary shows the insistance of", mode, "numbers:")
+	for i, j in listinsistent.items():
+		print(i, j)
+
 
 def tetraedric(n):
 	xn = 1.5
@@ -168,6 +226,18 @@ def listtetraedric(n, mode):
 	print("The following", mode, "numbers are tetraedric:")
 	print(listtetraedric)
 
+def wondrous(n):
+	number = n
+	counter = 0
+	while number != 1:
+		if number % 2 != 0:
+			number = number * 3 + 1
+		elif number % 2 == 0:
+			number /= 2
+		counter += 1
+		#print(counter, ", ", number)
+	print(str(n), "becomes wondrous after", str(counter), "steps")
+
 
 # Programming logic starts over here
 
@@ -186,18 +256,22 @@ parser.add_argument("--listhyperperfect", help="Generates list with hyperperfect
 parser.add_argument("--oddhyperperfect", help="Generates list with only odd hyperperfect numbers")
 parser.add_argument("--evenhyperperfect", help="Generates list with only even hyperperfect numbers")
 parser.add_argument("--insistent", help="Finds out how n-insistent the given number is")
-parser.add_argument("--listinsistent")
-parser.add_argument("--oddinsistent")
-parser.add_argument("--eveninsistent")
+parser.add_argument("--listinsistent", help="Generates list with n numbers showing how insistent they are")
+parser.add_argument("--oddinsistent", help="Generates list with n odd numbers showing how insistent they are")
+parser.add_argument("--eveninsistent", help="Generates list with n even numbers showing how insistent they are")
 parser.add_argument("--tetraedric", help="Finds out whether given number is tetraedric or not")
 parser.add_argument("--listtetraedric", help="Generates list with n tetraedric numbers")
-parser.add_argument("--oddtetraedric", help="Generates list with only odd n numbers")
-parser.add_argument("--eventetraedric", help="Generates list with only even n numbers")
+parser.add_argument("--oddtetraedric", help="Generates list with n only odd numbers")
+parser.add_argument("--eventetraedric", help="Generates list with n only even numbers")
 parser.add_argument("--heavy", help="Find out whether given number is heavy or not")
-parser.add_argument("--listheavy")
-parser.add_argument("--oddheavy")
-parser.add_argument("--evenheavy")
+parser.add_argument("--listheavy", help="Generates list with n heavy numbers")
+parser.add_argument("--oddheavy", help="Generates list with n odd heavy numbers")
+parser.add_argument("--evenheavy", help="Generates list with n even heavy numbers")
+
+parser.add_argument("--wondrous", help="Find out whether given number is wondrous or not")
+
 parser.add_argument("--any", help="Goes through any inline function and prints results for given number")
+parser.add_argument("--random", help="Generates random number with n digits and doing same like --any")
 
 args = parser.parse_args()
 
@@ -208,15 +282,15 @@ elif args.listabundant:					# --listabundant
 	limes = int(args.listabundant)
 	mode = "normal"
 	listabundant(limes, mode)
-elif args.oddabundant:				# --oddabundant
+elif args.oddabundant:					# --oddabundant
 	limes = int(args.oddabundant)
 	mode = "odd"
 	listabundant(limes, mode)
-elif args.evenabundant:				# --evenabundant
+elif args.evenabundant:					# --evenabundant
 	limes = int(args.evenabundant)
 	mode = "even"
 	listabundant(limes, mode)
-elif args.binary:					# --binary
+elif args.binary:						# --binary
 	n = int(args.binary)
 	binary(n)
 elif args.perfect:					# --perfect
@@ -255,6 +329,18 @@ elif args.heavy:						# --heavy
 elif args.insistent:					# --insistent
 	n = int(args.insistent)
 	insistent(n)
+elif args.listinsistent:					# --listinsistent
+	n = int(args.listinsistent)
+	mode = "normal"
+	listinsistent(n, mode)
+elif args.oddinsistent:					# --oddinsistent
+	n = int(args.oddinsistent)
+	mode = "odd"
+	listinsistent(n, mode)
+elif args.eveninsistent:					# --eveninsistent
+	n = int(args.eveninsistent)
+	mode = "even"
+	listinsistent(n, mode)
 elif args.tetraedric:					# --tetraedric
 	n = int(args.tetraedric)
 	tetraedric(n)
@@ -262,23 +348,35 @@ elif args.listtetraedric:					# --listtetraedric
 	limes = int(args.listtetraedric)
 	mode = "normal"
 	listtetraedric(limes, mode)
-elif args.oddtetraedric:				# --oddtetraedric
+elif args.oddtetraedric:					# --oddtetraedric
 	limes = int(args.oddtetraedric)
 	mode = "odd"
 	listtetraedric(limes, mode)
-elif args.eventetraedric:				# --eventetraedric
+elif args.eventetraedric:					# --eventetraedric
 	limes = int(args.eventetraedric)
 	mode = "even"
 	listtetraedric(limes, mode)
+elif args.listheavy:					# --listheavy
+	limes = int(args.listheavy)	
+	mode = "normal"
+	listheavy(limes, mode)
+elif args.oddheavy:					# --oddheavy
+	limes = int(args.oddheavy)
+	mode = "odd"
+	listheavy(limes, mode)
+elif args.evenheavy:					# --evenheavy
+	limes = int(args.evenheavy)
+	mode = "even"
+	listheavy(limes, mode)
+elif args.wondrous:
+	n = int(args.wondrous)
+	wondrous(n)
 elif args.any:						# --any
-	print("")
 	n = int(args.any)
-	abundant(n)
-	print("")
-	binary(n)
-	print("")
-	heavy(n)
-	print("")
-	insistent(n)
-	print("")
-	tetraedric(n)
+	any(n)
+elif args.random:
+	digits = int(args.random)
+	start = int("1" + str(digits * "0"))
+	end = int("9" + str(digits * "9"))
+	n = round(uniform(start, end))
+	any(n)
