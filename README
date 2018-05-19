@@ -1,8 +1,9 @@
-<h1>What's this number</h1>
-<h3>wtn.py</h3>
-<hr>
+# What's this number
+## wtn.py
+---
 
-usage: wtn.py [-h] [--abundant ABUNDANT] [--listabundant LISTABUNDANT]
+### usage: 
+       wtn.py [-h] [--abundant ABUNDANT] [--listabundant LISTABUNDANT]
               [--oddabundant ODDABUNDANT] [--evenabundant EVENABUNDANT]
               [--binary BINARY] [--perfect PERFECT]
               [--listperfect LISTPERFECT] [--oddperfect ODDPERFECT]
@@ -19,7 +20,7 @@ usage: wtn.py [-h] [--abundant ABUNDANT] [--listabundant LISTABUNDANT]
               [--evenheavy EVENHEAVY] [--wondrous WONDROUS] [--any ANY]
               [--random RANDOM]
 
-optional arguments:
+### optional arguments:
   -h, --help            show this help message and exit
   --abundant ABUNDANT   Finds out whether given number is abundant, perfect,
                         hyperperfect or nothing
